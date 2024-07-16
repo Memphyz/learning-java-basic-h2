@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.github.javafaker.Faker;
+import com.lucasribeiro.learning.entities.Order;
 import com.lucasribeiro.learning.entities.User;
 import com.lucasribeiro.learning.repositories.UserRepository;
 import com.lucasribeiro.learning.utils.ArrayUtils;
@@ -28,7 +29,8 @@ public class TestConfig implements CommandLineRunner {
 					faker.name().fullName(),
 					faker.internet().emailAddress(),
 					faker.phoneNumber().cellPhone(),
-					faker.internet().password())));
+					faker.internet().password(),
+					new ArrayList<Order>())));
 		userRepository.saveAll(users);
 	}
 	
