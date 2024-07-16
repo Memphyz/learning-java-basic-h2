@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import com.github.javafaker.Faker;
 import com.lucasribeiro.learning.entities.User;
 import com.lucasribeiro.learning.repositories.UserRepository;
+import com.lucasribeiro.learning.utils.ArrayUtils;
 
 @Configuration
 @Profile("test")
@@ -22,16 +23,12 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Faker faker = new Faker();
 		ArrayList<User> users = new ArrayList<User>();
-		int els = 0;
-		do {
-			users.add(new User(
+		ArrayUtils.loop(100, (i) -> users.add(new User(
 					faker.number().randomNumber(),
 					faker.name().fullName(),
 					faker.internet().emailAddress(),
 					faker.phoneNumber().cellPhone(),
-					faker.internet().password()));
-			++els;
-		} while (els <= 100);
+					faker.internet().password())));
 		userRepository.saveAll(users);
 	}
 	
