@@ -1,12 +1,13 @@
 package com.lucasribeiro.learning.config;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.github.javafaker.Faker;
 import com.lucasribeiro.learning.entities.User;
 import com.lucasribeiro.learning.repositories.UserRepository;
 
@@ -19,9 +20,19 @@ public class TestConfig implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		User user1 = new User(null, "Maria Brown", "maria@gmail.com", "988888888", "123456");
-		User user2 = new User(null, "Alex Green", "alex@gmail.com", "977777777", "123456"); 
-		userRepository.saveAll(Arrays.asList(user1, user2));
+		Faker faker = new Faker();
+		ArrayList<User> users = new ArrayList<User>();
+		int els = 0;
+		do {
+			users.add(new User(
+					faker.number().randomNumber(),
+					faker.name().fullName(),
+					faker.internet().emailAddress(),
+					faker.phoneNumber().cellPhone(),
+					faker.internet().password()));
+			++els;
+		} while (els <= 100);
+		userRepository.saveAll(users);
 	}
 	
 	
