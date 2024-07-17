@@ -12,6 +12,6 @@ public class ArrayUtils {
 		do {
 			action.accept(null);
 			++els;
-		} while (els <= quantity);
+		} while (els < quantity);
 	}
 }

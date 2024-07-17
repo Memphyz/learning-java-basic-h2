@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lucasribeiro.learning.abstracts.AbstractService;
-import com.lucasribeiro.learning.entities.Order;
-import com.lucasribeiro.learning.repositories.OrderRepository;
-
+import com.lucasribeiro.learning.entities.Category;
+import com.lucasribeiro.learning.repositories.CategoryRepository;
 import lombok.AccessLevel;
+
 import lombok.Getter;
 
 @Service
-public class OrderService extends AbstractService<Order, Long, OrderRepository> {
-	
+public class CategoryService extends AbstractService<Category, Long, CategoryRepository> {
+
 	@Autowired
 	@Getter(AccessLevel.PROTECTED)
-	private OrderRepository repository;
-	
+	private CategoryRepository repository;
+
 }

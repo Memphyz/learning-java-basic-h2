@@ -5,18 +5,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lucasribeiro.learning.abstracts.AbstractResource;
-import com.lucasribeiro.learning.entities.User;
-import com.lucasribeiro.learning.services.UserService;
+import com.lucasribeiro.learning.entities.Category;
+import com.lucasribeiro.learning.services.CategoryService;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource extends AbstractResource<User, Long, UserService> {
+@RequestMapping(value = "/categories")
+public class CategoryResource extends AbstractResource<Category, Long, CategoryService> {
 
 	@Autowired
 	@Getter(AccessLevel.PROTECTED)
-	private UserService service;
-	
+	private CategoryService service;
+
 }
