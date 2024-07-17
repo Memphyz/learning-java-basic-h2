@@ -4,14 +4,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lucasribeiro.learning.abstracts.AbstractResource;
-import com.lucasribeiro.learning.entities.User;
-import com.lucasribeiro.learning.services.UserService;
+import com.lucasribeiro.learning.entities.Order;
+import com.lucasribeiro.learning.services.OrderService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource extends AbstractResource<User, Long, UserService> {
+@RequestMapping(value = "/orders")
+public class OrderResource extends AbstractResource<Order, Long, OrderService> {
 
-	public UserResource(UserService service) {
+	public OrderResource(OrderService service) {
 		super(service);
 	}
 	

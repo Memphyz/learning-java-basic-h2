@@ -1,4 +1,4 @@
-package com.lucasribeiro.learning;
+package com.lucasribeiro.learning.abstracts;
 
 import java.util.List;
 
