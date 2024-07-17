@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Profile;
 import com.github.javafaker.Faker;
 import com.lucasribeiro.learning.entities.Order;
 import com.lucasribeiro.learning.entities.User;
+import com.lucasribeiro.learning.entities.types.OrderStatusType;
 import com.lucasribeiro.learning.repositories.OrderRepository;
 import com.lucasribeiro.learning.repositories.UserRepository;
 import com.lucasribeiro.learning.utils.ArrayUtils;
@@ -44,7 +45,7 @@ public class TestConfig implements CommandLineRunner {
 	}
 
 	private Order getOrder(Faker faker, User user) {
-		return new Order(null, Instant.now(), user);
+		return new Order(null, Instant.now(), user, OrderStatusType.WAITING_PAYMENT);
 	}
 
 	private ArrayList<User> runUsersTest(Faker faker) {

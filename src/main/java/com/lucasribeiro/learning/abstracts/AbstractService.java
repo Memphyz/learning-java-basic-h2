@@ -6,18 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public abstract class AbstractService<Entity, ID, Repository extends JpaRepository<Entity, ID>> {
 	
-	protected final Repository repository;
-	
-	public AbstractService(Repository repository) {
-		this.repository = repository;
-	}
+	protected abstract Repository getRepository();
 	
 	public List<Entity> findAll() {
-		return repository.findAll();
+		return getRepository().findAll();
 	}
 	
 	public Entity findById(ID id) {
-		Entity entity = repository.findById(id).get();
+		Entity entity = getRepository().findById(id).get();
 		return entity;
 	}
 	
