@@ -1,30 +1,21 @@
 package com.lucasribeiro.learning.config;
 
 import java.util.ArrayList;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import java.util.List;
 
 import com.github.javafaker.Faker;
 import com.lucasribeiro.learning.entities.Order;
-import com.lucasribeiro.learning.entities.User;
 import com.lucasribeiro.learning.repositories.UserRepository;
 import com.lucasribeiro.learning.utils.ArrayUtils;
+import com.lucasribeiro.learning.entities.User;
 
-@Configuration
-@Profile("test")
-public class UserTestConfig implements CommandLineRunner {
-	
-	@Autowired
-	private UserRepository repository;
+public class UserTestConfig {
 
-	@Override
-	public void run(String... args) throws Exception {
-		ArrayList<User> users = new ArrayList<User>();
+	public static List<User> run(UserRepository repository) {
+		List<User> users = new ArrayList<User>();
 		ArrayUtils.loop(100, (i) -> users.add(getUser()));
 		repository.saveAll(users);
+		return users;
 	}
 	
 	private static User getUser() {
