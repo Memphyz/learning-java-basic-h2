@@ -3,7 +3,6 @@ package com.lucasribeiro.learning.config;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.github.javafaker.Faker;
 import com.lucasribeiro.learning.entities.Category;
@@ -16,17 +15,16 @@ public class CategoryTestConfig {
 
 	public static List<Category> run(CategoryRepository repository) {
 		List<Category> categories = new ArrayList<Category>();
-		Set<Product> selectedProducts = new HashSet<Product>();
-		ArrayUtils.loop(100, (i) -> {
-			Category category = getCategory(selectedProducts);
+		ArrayUtils.loop(5, (i) -> {
+			Category category = getCategory();
 			categories.add(category);
 		});
 		repository.saveAll(categories);
 		return categories;
 	}
 	
-	private static Category getCategory(Set<Product> products) {
+	private static Category getCategory() {
 		Faker faker = new Faker();
-		return new Category(null, faker.cat().breed(), products);
+		return new Category(null, faker.cat().breed(), new HashSet<Product>());
 	}
 }

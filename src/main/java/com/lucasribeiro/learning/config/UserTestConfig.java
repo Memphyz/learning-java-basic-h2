@@ -13,7 +13,7 @@ public class UserTestConfig {
 
 	public static List<User> run(UserRepository repository) {
 		List<User> users = new ArrayList<User>();
-		ArrayUtils.loop(100, (i) -> users.add(getUser()));
+		ArrayUtils.loop(5, (i) -> users.add(getUser()));
 		repository.saveAll(users);
 		return users;
 	}

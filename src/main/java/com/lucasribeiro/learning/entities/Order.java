@@ -2,6 +2,8 @@ package com.lucasribeiro.learning.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.lucasribeiro.learning.entities.types.OrderStatusType;
@@ -14,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,5 +43,8 @@ public @Data class Order implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	private OrderStatusType status;
+	
+	@OneToMany(mappedBy = "id.order")
+	private Set<OrderItem> items = new HashSet<OrderItem>();
 
 }
