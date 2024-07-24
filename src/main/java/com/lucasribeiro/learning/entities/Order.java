@@ -18,12 +18,12 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of ="id")
 @Entity
 @Table(name = "tb_order")
 public @Data class Order implements Serializable {
@@ -37,14 +37,22 @@ public @Data class Order implements Serializable {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant moment;
 	
+	@Enumerated(EnumType.STRING)
+	private OrderStatusType status;
+	
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private User client;
 	
-	@Enumerated(EnumType.STRING)
-	private OrderStatusType status;
-	
 	@OneToMany(mappedBy = "id.order")
-	private Set<OrderItem> items = new HashSet<OrderItem>();
+	private final Set<OrderItem> items = new HashSet<OrderItem>();
+	
+	public Order(Long id, Instant moment, OrderStatusType orderStatus, User client) {
+		super();
+		this.id = id;
+		this.moment = moment;
+		this.client = client;
+		this.status = orderStatus;
+	}
 
 }

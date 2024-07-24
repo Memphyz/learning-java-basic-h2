@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 
 import com.lucasribeiro.learning.entities.Category;
 import com.lucasribeiro.learning.entities.Order;
+import com.lucasribeiro.learning.entities.OrderItem;
 import com.lucasribeiro.learning.entities.Product;
 import com.lucasribeiro.learning.entities.User;
 import com.lucasribeiro.learning.repositories.CategoryRepository;
@@ -25,12 +26,16 @@ public class TestConfig {
 			ProductRepository productRepository,
 			OrderItemRepository orderItemRepository
 			) {
-		List<User> users = UserTestConfig.run(userRepository);
-		List<Order> orders = OrderTestConfig.run(orderRepository, users);
-		List<Category> categories = CategoryTestConfig.run(categoryRepository);
-		List<Product> products = ProductTestConfig.run(productRepository, categories);
-		OrderItemTestConfig.run(orderItemRepository, orders, products);
-		
+		List<User> users = UserTestConfig.run();
+		List<Order> orders = OrderTestConfig.run(users);
+		List<Category> categories = CategoryTestConfig.run();
+		List<Product> products = ProductTestConfig.run(categories);
+		List<OrderItem> orderItems =OrderItemTestConfig.run(orders, products);
+		users = userRepository.saveAll(users);
+		categories = categoryRepository.saveAll(categories);
+		products = productRepository.saveAll(products);
+		orders= orderRepository.saveAll(orders);
+		orderItems= orderItemRepository.saveAll(orderItems);
 	}
 
 }

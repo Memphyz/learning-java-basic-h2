@@ -14,11 +14,13 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode(of ="id")
 @Table(name ="tb_category")
 public @Data class Category implements Serializable {
 	
@@ -31,5 +33,5 @@ public @Data class Category implements Serializable {
 	
 	@JsonIgnore
 	@ManyToMany(mappedBy = "categories")
-	private Set<Product> products = new HashSet<Product>();
+	private final Set<Product> products = new HashSet<Product>();
 }

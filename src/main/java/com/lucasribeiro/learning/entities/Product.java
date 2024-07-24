@@ -12,13 +12,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
 @Entity
 @Table(name = "tb_product")
 public @Data class Product implements Serializable {
@@ -35,5 +40,9 @@ public @Data class Product implements Serializable {
 
 	@ManyToMany()
 	@JoinTable(name = "tb_product_category", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
-	private Set<Category> categories = new HashSet<Category>();
+	private final Set<Category> categories = new HashSet<Category>();
+	
+	@OneToMany(mappedBy = "id.product")
+	@Getter(AccessLevel.NONE)
+	private final Set<OrderItem> items = new HashSet<>();
 }

@@ -35,5 +35,5 @@ public @Data class User implements Serializable {
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "client")
-	private List<Order> orders = new ArrayList<Order>();
+	private final List<Order> orders = new ArrayList<Order>();
 }
